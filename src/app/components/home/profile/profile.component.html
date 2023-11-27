@@ -1,0 +1,48 @@
+<div class="container mt-5 profile-container">
+  <div class="row">
+    <!-- Profile Sidebar -->
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <img src="" class="card-img-top" alt="Profile Picture">
+        <div class="card-body">
+          <h5 class="card-title">Username</h5>
+          <p class="card-text">Short bio or description.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile Details -->
+    <div class="col-md-8">
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Marks</h5>
+
+          <div class="d-flex ">
+            <div class="dropdown m-2">
+              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{buttonTitle.subject}}
+              </button>
+              <ul class="dropdown-menu">
+                <div *ngFor="let m of marks[0].subjects; index as i">
+                  <li ><a class="dropdown-item" (click)="selectSubject(m.name, i)" >{{m.name}}</a></li>
+                </div>
+              </ul>
+            </div>
+            <div class="dropdown m-2">
+              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{buttonTitle.month}}
+              </button>
+              <ul class="dropdown-menu">
+                <div *ngFor="let m of marks; index as i">
+                  <li ><a class="dropdown-item" (click)="selectMonth(m.month, i)" >{{m.month}}</a></li>
+                </div>
+              </ul>
+            </div>
+          </div>
+          <canvas id="canvas">{{chart}}</canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

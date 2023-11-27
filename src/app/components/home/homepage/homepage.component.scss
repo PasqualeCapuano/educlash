@@ -1,0 +1,16 @@
+.carousel{
+
+  canvas{
+    height: 500px;
+  }
+
+  .carousel-indicators [data-bs-target]{
+    border-top: 10px solid #b00dfd;
+  }
+}
+
+.card-header{
+  background-color: #b00dfd;
+  color: white;
+}
+

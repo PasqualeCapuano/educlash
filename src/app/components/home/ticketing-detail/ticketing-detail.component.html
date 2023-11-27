@@ -1,0 +1,55 @@
+<div class="d-flex m-5">
+  <div class="ticket-details">
+    <h2>Ticket Detail</h2>
+
+    <div class="detail-item">
+      <h3>Title:</h3>
+      <p>{{ rowData.title }}</p>
+    </div>
+
+    <div class="detail-item">
+      <h3>Description:</h3>
+      <p>{{ rowData.description }}</p>
+    </div>
+
+    <div class="detail-item">
+      <h3>Status:</h3>
+      <p *ngIf="rowData.status === 'open'" style="color: rebeccapurple"><i class="bi bi-circle"></i> Ticket opened</p>
+      <p *ngIf="rowData.status === 'closed'" style="color: rebeccapurple"><i class="bi bi-circle-fill"></i> Ticket closed</p>
+      <p *ngIf="rowData.status === 'processing'" style="color: rebeccapurple"><i class="bi bi-circle-half"></i> Ticket in process</p>
+    </div>
+
+    <div class="detail-item">
+      <h3>Customer Name:</h3>
+      <p>{{ rowData.customerName }}</p>
+    </div>
+
+    <div class="detail-item">
+      <h3>Customer Email:</h3>
+      <p>{{ rowData.customerEmail }}</p>
+    </div>
+  </div>
+  <div *ngIf="rowData.messages" class="ticket-details d-flex flex-column justify-content-between">
+    <h2>Chat</h2>
+    <div style="overflow-y: scroll; height: 55vh">
+      <div class="card m-2" *ngFor="let m of rowData.messages">
+        <div class="card-header">
+          <p *ngIf="m.user === 'user'" style="text-align: start; font-weight: bold">{{m.customerName}}</p>
+          <p *ngIf="m.user === 'admin'" style="text-align: end; font-weight: bold">Admin</p>
+        </div>
+        <div class="card-body">
+          <div class="card-text">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <form style="text-align: end">
+      <div class="mb-3">
+        <input style="text-align: end" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
+      <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i> Send</button>
+    </form>
+  </div>
+</div>
+

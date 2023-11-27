@@ -1,0 +1,58 @@
+@media (max-width: 768px) {
+  nav {
+    display: none;
+    position: fixed;
+  }
+
+}
+
+.menuColorVisible{
+  color: #ffffff;
+}
+
+.toggleSidebar{
+  display: block;
+  z-index: 1;
+}
+
+.hamburger-menu{
+  position: absolute;
+  font-size: 2rem;
+  z-index: 2;
+}
+
+nav {
+  width: 200px;
+  background: linear-gradient(to bottom, #7b1fa2, #4a148c);
+  height: 100vh;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  hr{
+    color: white;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      margin-bottom: 10px;
+
+      a {
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+        color: #fff; // White text for better contrast against the purple background
+        font-size: 1.2rem;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.2); // Lighter shade on hover
+          color: #fff;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+.profile-container {
+  .card {
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    &-img-top {
+      height: 200px;
+      object-fit: cover;
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
+    }
+
+    &-body {
+      h5.card-title {
+        color: #c163ff; // Primary color, change as needed
+      }
+
+      .btn {
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .activity-feed {
+    .feed-item {
+      border-bottom: 1px solid #e9ecef;
+      padding: 10px 0;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .feed-date {
+        font-size: 0.85rem;
+        color: #6c757d; // Bootstrap's secondary text color
+      }
+
+      .feed-content {
+        margin-top: 5px;
+      }
+    }
+  }
+}

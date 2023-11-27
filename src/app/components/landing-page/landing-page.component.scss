@@ -1,0 +1,85 @@
+.landing-page {
+  text-align: center;
+  padding: 40px;
+
+  .header {
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 1.2rem;
+      color: #777;
+    }
+  }
+
+  .section {
+    margin-top: 40px;
+
+    &.features {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+
+      .feature {
+        text-align: left;
+
+        i {
+          font-size: 2rem;
+          margin-bottom: 10px;
+          color: #4a148c; /* Purple icon color */
+        }
+
+        h2 {
+          font-size: 1.5rem;
+          margin-bottom: 10px;
+        }
+
+        p {
+          font-size: 1.2rem;
+          color: #777;
+        }
+      }
+    }
+
+    &.mission {
+      h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+      }
+
+      p {
+        font-size: 1.2rem;
+        color: #777;
+      }
+    }
+
+    &.call-to-action {
+      h2 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+      }
+
+      p {
+        font-size: 1.2rem;
+        color: #777;
+        margin-bottom: 20px;
+      }
+
+      .btn-primary {
+        background-color: #4a148c; /* Purple button background */
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: #7b1fa2; /* Darker purple on hover */
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+  <div class="challenge-list">
+    <div *ngFor="let c of challenge" class="photo-item">
+      <div class="card" style="width: 20rem;">
+        <img style="object-fit: cover;height: 200px;width: 100%;" src="{{c.src}}" class="card-img-top" alt="photo">
+        <div class="card-body">
+          <h5 class="card-title">{{c.name}}</h5>
+          <p class="card-text">{{c.description}}</p>
+          <button class="btn btn-primary" (click)="openDetailPage(c)">Photographer link</button>
+        </div>
+      </div>
+    </div>
+  </div>

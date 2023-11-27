@@ -1,0 +1,45 @@
+.spinner-grow{
+  width: 3rem;
+  height: 3rem;
+  color: #7b1fa2;
+}
+
+.photo-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+  height: 100vh;
+
+
+  // Custom scrollbar styles
+  &::-webkit-scrollbar {
+    width: 12px; // Adjust the width of the scrollbar
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(241, 241, 241, 0); // Color of the scrollbar track
+    border-radius: 6px; // Optional: for rounded corners
+
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #7b1fa2, #4a148c); // Purple gradient for the scrollbar thumb
+    border-radius: 6px; // Optional: for rounded corners
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #9c27b0, #6a1b9a); // Slightly different gradient on hover
+  }
+
+  .photo-item {
+    margin: 20px;
+
+    p {
+      width: 100%; // Responsive video width
+      height: auto;
+    }
+  }
+}
+

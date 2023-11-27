@@ -1,0 +1,22 @@
+<div class="d-flex justify-content-center align-items-center">
+  <div class="text-center" *ngIf="spinner">
+    <div class="spinner-grow"  role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div class="photo-list">
+    <div *ngFor="let p of photos" class="photo-item">
+      <div class="card" style="width: 20rem;">
+        <img style="object-fit: cover;height: 200px;width: 100%;" src="{{p.src.original}}" class="card-img-top" alt="{{p.alt}}">
+        <div class="card-body">
+          <h5 class="card-title">{{p.photographer}}</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="{{p.photographer_url}}" target="_blank" class="btn btn-primary">Photographer link</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
