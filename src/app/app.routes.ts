@@ -11,12 +11,14 @@ import {TicketingDetailComponent} from "./components/home/ticketing-detail/ticke
 import {ProfileComponent} from "./components/home/profile/profile.component";
 import {ChallengeComponent} from "./components/home/challenge/challenge.component";
 import {ChallengeDetailComponent} from "./components/home/challenge-detail/challenge-detail.component";
+import {SettingsComponent} from "./components/home/settings/settings.component";
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent, children: [
       { path: 'sidebar', component: SidebarComponent },
+      { path: 'settings', component: SettingsComponent },
       { path: 'homepage', component: HomepageComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'challenge', component: ChallengeComponent },
