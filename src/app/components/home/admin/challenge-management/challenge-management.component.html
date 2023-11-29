@@ -1,0 +1,23 @@
+<div class="container">
+  <h1 class="text-center">Gestione Challenges</h1>
+  <div class="mt-5 justify-content-center d-flex">
+    <button class="btn btn-primary">Aggiungi Challenge</button>
+  </div>
+
+  <div class="challenge-list">
+    <div *ngFor="let c of challenge" class="photo-item">
+      <div class="card" style="width: 20rem;">
+        <img style="object-fit: cover;height: 200px;width: 100%;" src="{{c.src}}" class="card-img-top" alt="photo">
+        <div class="card-body">
+          <h5 class="card-title">{{c.name}}</h5>
+          <p class="card-text">{{c.description}}</p>
+          <div class="justify-content-center d-flex">
+          <button class="btn btn-primary me-2" (click)="openDetailPage(c)">Visualizza</button>
+          <button class="btn btn-primary me-2">Modifica</button>
+          <button class="btn btn-primary">Rimuovi</button>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

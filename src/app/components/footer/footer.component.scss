@@ -1,17 +1,39 @@
 .footer {
-  background-color: #7b1fa2; /* Purple */
-  padding: 20px;
-  color: #fff;
-  text-align: center;
-
-  a {
-    text-decoration: none;
+    display: flex;
+    background-color: #7b1fa2;
+    /* Purple */
+    padding: 20px;
     color: #fff;
-    font-weight: bold;
-    transition: color 0.3s;
+    text-align: center;
+    justify-content: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
 
-    &:hover {
-      color: #4a148c; /* Darker purple */
+    a {
+        text-decoration: none;
+        color: #fff;
+        font-weight: bold;
+        transition: color 0.3s;
+
+        &:hover {
+            text-decoration: underline;
+        }
     }
-  }
+
+    .link {
+        gap: 40px;
+
+        a {
+            color: white;
+
+            &:hover {
+                transform: scale(1.2);
+            }
+
+            i {
+                color: white;
+            }
+        }
+    }
 }

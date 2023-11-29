@@ -11,12 +11,16 @@ import {TicketingDetailComponent} from "./components/home/ticketing-detail/ticke
 import {ProfileComponent} from "./components/home/profile/profile.component";
 import {ChallengeComponent} from "./components/home/challenge/challenge.component";
 import {ChallengeDetailComponent} from "./components/home/challenge-detail/challenge-detail.component";
+import {SettingsComponent} from "./components/home/settings/settings.component";
+import { UserManagementComponent } from './components/home/admin/user-management/user-management.component';
+import { ChallengeManagementComponent } from './components/home/admin/challenge-management/challenge-management.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent, children: [
       { path: 'sidebar', component: SidebarComponent },
+      { path: 'settings', component: SettingsComponent },
       { path: 'homepage', component: HomepageComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'challenge', component: ChallengeComponent },
@@ -24,7 +28,9 @@ export const routes: Routes = [
       { path: 'tutorial', component: TutorialComponent },
       { path: 'ticketing', component: TicketingComponent },
       { path: 'ticketing/:id', component: TicketingDetailComponent },
-      { path: 'admin', component: AdminComponent}
+      { path: 'admin', component: AdminComponent},
+      {path: 'admin/user-management', component: UserManagementComponent},
+      {path: 'admin/challenge-management', component: ChallengeManagementComponent},
     ]
   },
 
