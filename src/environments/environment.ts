@@ -1,11 +1,12 @@
 export const environment = {
   firebase: {
-    apiKey: "AIzaSyClfd11KystoPqrpMZH9uvAKkH-3G4_MBA",
-    authDomain: "educlash-f0452.firebaseapp.com",
-    projectId: "educlash-f0452",
-    storageBucket: "educlash-f0452.appspot.com",
-    messagingSenderId: "615230319697",
-    appId: "1:615230319697:web:c440999dd4cfa580715c70"
+      apiKey: "AIzaSyAG0hszH-LeA5KP1PQUYzZuPRp98ump2Ow",
+      authDomain: "test-fb550.firebaseapp.com",
+      databaseURL: "https://test-fb550-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "test-fb550",
+      storageBucket: "test-fb550.appspot.com",
+      messagingSenderId: "422343817880",
+      appId: "1:422343817880:web:91df2b92b6f6663c9faeed"
   },
   production: true,
   useEmulators: false,
