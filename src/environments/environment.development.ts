@@ -8,5 +8,5 @@ export const environment = {
     appId: "1:615230319697:web:c440999dd4cfa580715c70"
   },
   production: false,
-  useEmulators: true,
+  useEmulators: false,
 };
