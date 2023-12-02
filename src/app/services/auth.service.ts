@@ -1,68 +1,41 @@
-import { Injectable, computed, inject, signal } from '@angular/core';
-import { from, defer } from 'rxjs';
-import { authState } from 'rxfire/auth';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Auth, User, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
-import { Credentials } from '../interfaces/credentials';
+import { Injectable } from '@angular/core';
+import { AngularFireAuth } from "@angular/fire/compat/auth";
+import {AngularFirestore} from "@angular/fire/compat/firestore";
+import {Observable} from "rxjs";
 
-export type AuthUser = User | null | undefined;
-
-interface AuthState {
-  user: AuthUser;
-}
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+    constructor(private afAuth: AngularFireAuth, private firestore: AngularFirestore) {}
 
-  private auth = inject(Auth);
+    async login(email: string, password: string): Promise<void> {
+        try {
+            await this.afAuth.signInWithEmailAndPassword(email, password);
+        } catch (error) {
+            throw error;
+        }
+    }
+    async logout(): Promise<void> {
+        try {
+            await this.afAuth.signOut();
+        } catch (error) {
+            throw error;
+        }
+    }
 
-  // sources
-  private user$ = authState(this.auth);
+    isLoggedIn(): Observable<boolean> {
+        return new Observable(subscriber => {
+            this.afAuth.authState.subscribe(user => {
+                subscriber.next(!!user);
+                subscriber.complete();
+            });
+        });
+    }
 
-  // state
-  private state = signal<AuthState>({
-    user: undefined,
-  });
+    addUser(uid: string, userData: any) {
+        return this.firestore.collection('users').doc(uid).set(userData);
+    }
 
-  // selectors
-  user = computed(() => this.state().user);
-
-  constructor() {
-    this.user$.pipe(takeUntilDestroyed()).subscribe((user) =>
-      this.state.update((state) => ({
-        ...state,
-        user,
-      }))
-    );
-  }
-
-  login(credentials: Credentials) {
-    return from(
-      defer(() =>
-        signInWithEmailAndPassword(
-          this.auth,
-          credentials.email,
-          credentials.password
-        )
-      )
-    );
-  }
-
-  logout() {
-    signOut(this.auth);
-  }
-
-  createAccount(credentials: Credentials) {
-    return from(
-      defer(() =>
-        createUserWithEmailAndPassword(
-          this.auth,
-          credentials.email,
-          credentials.password
-        )
-      )
-    );
-  }
 }

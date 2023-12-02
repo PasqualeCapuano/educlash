@@ -6,37 +6,25 @@ import { getAuth, provideAuth, connectAuthEmulator, Auth} from '@angular/fire/au
 import { environment } from '../environments/environment';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { routes } from './app.routes';
+import {AngularFireModule} from "@angular/fire/compat";
+import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 
-// Anche solo dichiararla fa crashare tutto
-// export const app = initializeApp(environment.firebase);
 
 export const appConfig: ApplicationConfig = {
     providers: [
         provideRouter(routes),
         provideAnimations(),
         importProvidersFrom([
-            provideFirebaseApp(() => initializeApp(environment.firebase)),
-            provideFirestore(() => {
-                if (environment.useEmulators) {
-                    let firestore: Firestore = initializeFirestore(getApp(), {});
-                    connectFirestoreEmulator(firestore, 'localhost', 8080);
-                    return firestore;
-                };
-                return getFirestore();
-            }),
-            provideAuth(() => {
-                let auth: Auth = getAuth();
-                if (environment.useEmulators) connectAuthEmulator(auth, 'http://localhost:9099', { disableWarnings: true });
-                return auth;
-            })
-            /*
+            // provideFirebaseApp(() => initializeApp(environment.firebase)),
+            // provideFirestore(() => {return getFirestore();
+            // }),
+            // provideAuth(() => {
+            //     let auth: Auth = getAuth();
+            //     return auth;
+            // })
 
-            Si possono sostituire ai 2 providers elencati sopra quando useEmulators saranno 'False' di default
-
-            provideFirestore(() => getFirestore()),
-            provideAuth(() => getAuth())
-
-            */
+            AngularFireModule.initializeApp(environment.firebase),
+            AngularFireAuthModule
         ])
     ]
 };

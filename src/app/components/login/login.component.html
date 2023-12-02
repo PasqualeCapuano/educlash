@@ -11,6 +11,7 @@
         <input type="password" id="password" name="password" [(ngModel)]="password" required>
       </div>
       <button type="submit" [disabled]="!loginForm.valid" class="login-button">Login</button>
+        <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
     </form>
   </div>
 </div>

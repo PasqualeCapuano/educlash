@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from "@angular/router";
 import { FormsModule } from "@angular/forms";
-import { AuthService } from '../../services/auth.service';
+import { AngularFireAuth } from "@angular/fire/compat/auth";
+import {AuthService} from "../../services/auth.service";
+
+
 
 @Component({
     selector: 'app-login',
@@ -15,20 +18,22 @@ export class LoginComponent {
 
     email: string = '';
     password: string = '';
+    errorMessage: string | null = null;
 
-    constructor(private authService: AuthService, private router: Router) { }
+    constructor(private router: Router, private authService: AuthService) { }
 
     login() {
-        this.authService.login({email: this.email, password: this.password}).subscribe({
-            next: (data) => {
-                console.log(data);
-                this.router.navigate(['home/homepage']);
-            },
-            error: (error) => {
-                console.log(error.message);
-            }
-        })
+        this.authService.login(this.email, this.password)
+            .then(() => {
+                console.log('User logged in');
+                this.router.navigate(['/home/homepage']);
+
+            })
+            .catch(error => {
+                this.errorMessage = error.message;
+            });
     }
+
 }
 
 

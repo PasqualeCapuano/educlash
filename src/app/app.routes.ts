@@ -15,15 +15,18 @@ import { PrivacyPolicyComponent } from './components/footer/privacy-policy/priva
 import {SettingsComponent} from "./components/home/settings/settings.component";
 import { UserManagementComponent } from './components/home/admin/user-management/user-management.component';
 import { ChallengeManagementComponent } from './components/home/admin/challenge-management/challenge-management.component';
+import {RegisterComponent} from "./components/register/register.component";
+import {AuthGuard} from "./guards/auth.guard";
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent, children: [
-      { path: 'sidebar', component: SidebarComponent },
-      { path: 'settings', component: SettingsComponent },
-      { path: 'homepage', component: HomepageComponent },
-      { path: 'profile', component: ProfileComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard],  children: [
+      { path: 'sidebar', component: SidebarComponent, },
+      { path: 'settings', component: SettingsComponent, },
+      { path: 'homepage', component: HomepageComponent, },
+      { path: 'profile', component: ProfileComponent,},
       { path: 'challenge', component: ChallengeComponent },
       { path: 'challenge/:id', component: ChallengeDetailComponent },
       { path: 'tutorial', component: TutorialComponent },
