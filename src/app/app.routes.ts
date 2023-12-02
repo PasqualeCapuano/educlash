@@ -11,6 +11,7 @@ import {TicketingDetailComponent} from "./components/home/ticketing-detail/ticke
 import {ProfileComponent} from "./components/home/profile/profile.component";
 import {ChallengeComponent} from "./components/home/challenge/challenge.component";
 import {ChallengeDetailComponent} from "./components/home/challenge-detail/challenge-detail.component";
+import { PrivacyPolicyComponent } from './components/footer/privacy-policy/privacy-policy.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -27,5 +28,6 @@ export const routes: Routes = [
       { path: 'admin', component: AdminComponent}
     ]
   },
+  { path: 'privacy', component: PrivacyPolicyComponent }
 
 ];
