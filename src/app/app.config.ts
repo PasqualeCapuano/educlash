@@ -1,49 +1,42 @@
-import { ApplicationConfig, InjectionToken } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { initializeApp } from 'firebase/app';
-import {
-  Firestore,
-  initializeFirestore,
-  connectFirestoreEmulator,
-  getFirestore,
-} from 'firebase/firestore';
-import { getAuth, connectAuthEmulator } from 'firebase/auth';
+import { provideFirebaseApp, initializeApp, getApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore, Firestore, initializeFirestore, connectFirestoreEmulator } from '@angular/fire/firestore';
+import { getAuth, provideAuth, connectAuthEmulator, Auth} from '@angular/fire/auth';
 import { environment } from '../environments/environment';
-
 import { provideAnimations } from '@angular/platform-browser/animations';
-
 import { routes } from './app.routes';
 
-const app = initializeApp(environment.firebase);
-
-
-export const AUTH = new InjectionToken('Firebase auth', {
-  providedIn: 'root',
-  factory: () => {
-    const auth = getAuth();
-    if (environment.useEmulators) {
-      connectAuthEmulator(auth, 'http://localhost:9099', {
-        disableWarnings: true,
-      });
-    }
-    return auth;
-  },
-});
-
-export const FIRESTORE = new InjectionToken('Firebase firestore', {
-  providedIn: 'root',
-  factory: () => {
-    let firestore: Firestore;
-    if (environment.useEmulators) {
-      firestore = initializeFirestore(app, {});
-      connectFirestoreEmulator(firestore, 'localhost', 8080);
-    } else {
-      firestore = getFirestore();
-    }
-    return firestore;
-  },
-});
+// Anche solo dichiararla fa crashare tutto
+// export const app = initializeApp(environment.firebase);
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideAnimations()],
+    providers: [
+        provideRouter(routes),
+        provideAnimations(),
+        importProvidersFrom([
+            provideFirebaseApp(() => initializeApp(environment.firebase)),
+            provideFirestore(() => {
+                if (environment.useEmulators) {
+                    let firestore: Firestore = initializeFirestore(getApp(), {});
+                    connectFirestoreEmulator(firestore, 'localhost', 8080);
+                    return firestore;
+                };
+                return getFirestore();
+            }),
+            provideAuth(() => {
+                let auth: Auth = getAuth();
+                if (environment.useEmulators) connectAuthEmulator(auth, 'http://localhost:9099', { disableWarnings: true });
+                return auth;
+            })
+            /*
+
+            Si possono sostituire ai 2 providers elencati sopra quando useEmulators saranno 'False' di default
+
+            provideFirestore(() => getFirestore()),
+            provideAuth(() => getAuth())
+
+            */
+        ])
+    ]
 };

@@ -1,13 +1,10 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { EMPTY, Observable, Subject, defer, exhaustMap, from } from 'rxjs';
-import { collection, query, orderBy, limit, addDoc } from 'firebase/firestore';
-import { collectionData } from 'rxfire/firestore';
-import { catchError, filter, map, retry } from 'rxjs/operators';
-
+import { Observable, Subject, defer, exhaustMap } from 'rxjs';
+import { filter, map, retry } from 'rxjs/operators';
 import { AuthService } from './auth.service';
-import {Message} from "../interfaces/messages";
-import {FIRESTORE} from "../app.config";
+import { Message } from "../interfaces/messages";
+import { Firestore, collectionData, collection, query, orderBy, limit, addDoc } from '@angular/fire/firestore';
 
 interface MessageState {
   messages: Message[];
@@ -18,7 +15,7 @@ interface MessageState {
   providedIn: 'root',
 })
 export class MessageService {
-  private firestore = inject(FIRESTORE);
+  private firestore = inject(Firestore);
   private authService = inject(AuthService);
   private authUser$ = toObservable(this.authService.user);
 

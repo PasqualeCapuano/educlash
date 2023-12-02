@@ -1,16 +1,9 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { from, defer } from 'rxjs';
-import {
-  User,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-} from 'firebase/auth';
 import { authState } from 'rxfire/auth';
-import { Credentials } from '../interfaces/credentials';
-
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import {AUTH} from "../app.config";
+import { Auth, User, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
+import { Credentials } from '../interfaces/credentials';
 
 export type AuthUser = User | null | undefined;
 
@@ -22,7 +15,8 @@ interface AuthState {
   providedIn: 'root',
 })
 export class AuthService {
-  private auth = inject(AUTH);
+
+  private auth = inject(Auth);
 
   // sources
   private user$ = authState(this.auth);
