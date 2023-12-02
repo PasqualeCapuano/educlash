@@ -30,7 +30,6 @@ export class RegisterComponent {
                     user?.updateProfile({displayName: this.displayName})
                         .then(() => {
                             console.log('Registered successfully!');
-                            this.router.navigate(['/auth/login']);
 
                             this.authService.addUser(user.uid, {
                                 displayName: this.displayName,
@@ -44,6 +43,7 @@ export class RegisterComponent {
                                 .catch(error => {
                                     console.error('Error adding user to Firestore:', error);
                                 });
+                            this.router.navigate(['/login']);
 
                         })
                         .catch(error => {
