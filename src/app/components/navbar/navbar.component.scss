@@ -1,9 +1,9 @@
 .navbar {
-    background: white;
+    background: transparent;
     /* Gradient of two shades of purple */
 
     .container {
-        padding: 30px 0 30px 0;
+        padding: 25px 0 25px 0;
         border-bottom: 1px solid purple;
     }
 
@@ -52,10 +52,10 @@
             border: 2px solid #4a148c;
             color: #4a148c;
             font-size: 18px;
+            background-color: transparent;
 
             &:hover {
-                border: 2px solid purple;
-                background-color: purple;
+                background: linear-gradient(to bottom, #4a148c, purple);
                 font-weight: bold;
                 color: white;
             }
