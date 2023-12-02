@@ -11,6 +11,7 @@ import {TicketingDetailComponent} from "./components/home/ticketing-detail/ticke
 import {ProfileComponent} from "./components/home/profile/profile.component";
 import {ChallengeComponent} from "./components/home/challenge/challenge.component";
 import {ChallengeDetailComponent} from "./components/home/challenge-detail/challenge-detail.component";
+import { PrivacyPolicyComponent } from './components/footer/privacy-policy/privacy-policy.component';
 import {SettingsComponent} from "./components/home/settings/settings.component";
 import { UserManagementComponent } from './components/home/admin/user-management/user-management.component';
 import { ChallengeManagementComponent } from './components/home/admin/challenge-management/challenge-management.component';
@@ -33,5 +34,6 @@ export const routes: Routes = [
       {path: 'admin/challenge-management', component: ChallengeManagementComponent},
     ]
   },
+  { path: 'privacy', component: PrivacyPolicyComponent }
 
 ];
