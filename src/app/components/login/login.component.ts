@@ -19,13 +19,15 @@ export class LoginComponent {
     email: string = '';
     password: string = '';
     errorMessage: string | null = null;
+    userData: any;
 
     constructor(private router: Router, private authService: AuthService) { }
 
     login() {
         this.authService.login(this.email, this.password)
-            .then(() => {
-                console.log('User logged in');
+            .then(res => {
+                localStorage.setItem('userID', res.uid);
+
                 this.router.navigate(['/home/homepage']);
 
             })

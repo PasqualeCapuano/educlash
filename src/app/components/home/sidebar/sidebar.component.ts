@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {Router, RouterLink} from "@angular/router";
 import { AuthService } from '../../../services/auth.service';
@@ -16,7 +16,9 @@ export class SidebarComponent {
 
   isSidebarHidden = false;
 
+
     logout() {
+        localStorage.removeItem('userID');
         this.authService.logout()
             .then(() => {
                 console.log('User logged out');

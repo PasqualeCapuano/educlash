@@ -35,7 +35,25 @@ export class RegisterComponent {
                                 displayName: this.displayName,
                                 email: this.email,
                                 userUID: user.uid,
-                                admin: false
+                                admin: false,
+                                tickets: [
+                                    {
+                                        number: 1,
+                                        title: 'Ticket 1',
+                                        status: 'open',
+                                        name: this.displayName,
+                                        email: this.email,
+                                        chat: [
+                                            {
+                                                message: 'Welcome to the chat!',
+                                                sender: this.displayName,
+                                                timestamp: new Date()
+                                            }
+                                        ]
+                                    },
+
+                                ],
+
                             })
                                 .then(() => {
                                     console.log('User added to Firestore successfully!');
