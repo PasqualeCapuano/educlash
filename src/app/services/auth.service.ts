@@ -10,13 +10,16 @@ import {Observable} from "rxjs";
 export class AuthService {
     constructor(private afAuth: AngularFireAuth, private firestore: AngularFirestore) {}
 
-    async login(email: string, password: string): Promise<void> {
-        try {
-            await this.afAuth.signInWithEmailAndPassword(email, password);
-        } catch (error) {
-            throw error;
-        }
+    login(email: string, password: string): Promise<any> {
+        return this.afAuth.signInWithEmailAndPassword(email, password)
+            .then(result => {
+                return result.user;
+            })
+            .catch(error => {
+                throw error;
+            });
     }
+
     async logout(): Promise<void> {
         try {
             await this.afAuth.signOut();
@@ -36,6 +39,20 @@ export class AuthService {
 
     addUser(uid: string, userData: any) {
         return this.firestore.collection('users').doc(uid).set(userData);
+    }
+
+    getUserById(uid: string) {
+        return this.firestore.collection('users').doc(uid).valueChanges();
+    }
+
+    getAllUsers() {
+        return this.firestore.collection('users').valueChanges();
+    }
+
+    addTicket(uid: string, ticketData: any) {
+        return this.firestore.collection('users').doc(uid).update({
+            tickets: ticketData
+        });
     }
 
 }
