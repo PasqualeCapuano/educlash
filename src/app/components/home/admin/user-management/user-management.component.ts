@@ -21,6 +21,7 @@ export class UserManagementComponent implements OnInit{
     email: string | undefined;
     password: string | undefined;
     users: any;
+    selectedUid: string | undefined;
 
     isModalOpen = false;
 
@@ -70,14 +71,6 @@ export class UserManagementComponent implements OnInit{
                                 .catch(error => {
                                     console.error('Error adding user to Firestore:', error);
                                 });
-                            // this.router.navigate(['/login']);
-                             // Chiudi la modale dopo la registrazione
-                            //  const modal = document.getElementById('addUser');
-                            //  if (modal) {
-                            //      modal.classList.remove('show');
-                            //      modal.setAttribute('aria-hidden', 'true');
-                            //      modal.setAttribute('style', 'display: none');
-                            //  }
                         })
                         .catch(error => {
                             console.error('Error updating display name:', error);
@@ -91,8 +84,13 @@ export class UserManagementComponent implements OnInit{
         }
     }
 
-    deleteUser(uid: string) {
-        this.authService.deleteUserById(uid);
+    selectUidToDelete(uid: string) {
+        this.selectedUid = uid;
+        console.log(this.selectedUid)
+    }
+
+    deleteUser() {
+        this.authService.deleteUserById(this.selectedUid!);
     }
 
 }
