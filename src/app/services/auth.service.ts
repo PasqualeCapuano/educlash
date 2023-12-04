@@ -55,4 +55,8 @@ export class AuthService {
         });
     }
 
+    deleteUserById(uid: string) {
+        return this.firestore.collection('users').doc(uid).delete();
+    }
+
 }

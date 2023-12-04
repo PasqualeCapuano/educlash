@@ -1,13 +1,98 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-user-management',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './user-management.component.html',
   styleUrl: './user-management.component.scss'
 })
-export class UserManagementComponent {
+export class UserManagementComponent implements OnInit{
+
+    constructor(private router: Router, private afAuth: AngularFireAuth, private authService: AuthService) {
+    }
+
+    displayName: string | undefined;
+    email: string | undefined;
+    password: string | undefined;
+    users: any;
+
+    isModalOpen = false;
+
+    ngOnInit(): void {
+        this.authService.getAllUsers().subscribe(users => {
+            this.users = users;
+            console.log(this.users);
+        });
+    }
+
+    addUser() {
+        if (this.displayName && this.email && this.password) {
+            this.afAuth.createUserWithEmailAndPassword(this.email, this.password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    user?.updateProfile({displayName: this.displayName})
+                        .then(() => {
+                            console.log('Registered successfully!');
+
+                            this.authService.addUser(user.uid, {
+                                displayName: this.displayName,
+                                email: this.email,
+                                userUID: user.uid,
+                                admin: false,
+                                tickets: [
+                                    // {
+                                    //     number: 1,
+                                    //     title: 'Ticket 1',
+                                    //     status: 'open',
+                                    //     name: this.displayName,
+                                    //     email: this.email,
+                                    //     chat: [
+                                    //         {
+                                    //             message: 'Welcome to the chat!',
+                                    //             sender: this.displayName,
+                                    //             timestamp: new Date()
+                                    //         }
+                                    //     ]
+                                    // },
+
+                                ],
+
+                            })
+                                .then(() => {
+                                    console.log('User added to Firestore successfully!');
+                                })
+                                .catch(error => {
+                                    console.error('Error adding user to Firestore:', error);
+                                });
+                            // this.router.navigate(['/login']);
+                             // Chiudi la modale dopo la registrazione
+                            //  const modal = document.getElementById('addUser');
+                            //  if (modal) {
+                            //      modal.classList.remove('show');
+                            //      modal.setAttribute('aria-hidden', 'true');
+                            //      modal.setAttribute('style', 'display: none');
+                            //  }
+                        })
+                        .catch(error => {
+                            console.error('Error updating display name:', error);
+                        });
+                })
+                .catch(error => {
+                    console.error('Error registering:', error);
+                });
+        } else {
+            console.error('Display name, email, and password are required.');
+        }
+    }
+
+    deleteUser(uid: string) {
+        this.authService.deleteUserById(uid);
+    }
 
 }
