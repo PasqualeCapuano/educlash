@@ -1,7 +1,7 @@
 <div class="container">
   <h1 class="text-center">Gestione Utenti</h1>
   <div class="mt-4 d-flex justify-content-end">
-    <button class="btn btn-primary">Aggiungi utente</button>
+    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#addUser">Aggiungi utente</button>
   </div>
   <div class="my-4">
     <table class="table table-bordered">
@@ -34,5 +34,26 @@
       </tbody>
     </table>
   </div>
+
+
+  <!-- ADD NEW USER MODAL -->
+  <div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="addUserModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="addUserModal">Aggiungi Utente</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 </div>
