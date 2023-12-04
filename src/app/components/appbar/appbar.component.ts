@@ -2,6 +2,7 @@ import { Component, TemplateRef, ViewChild, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from "@angular/router";
 import { Notification } from '../../interfaces/notification';
+import {AuthService} from "../../services/auth.service";
 
 @Component({
     selector: 'app-appbar',
@@ -11,25 +12,23 @@ import { Notification } from '../../interfaces/notification';
     styleUrl: './appbar.component.scss'
 })
 export class AppbarComponent implements OnInit {
-    
-    @ViewChild('message') 
+
+    @ViewChild('message')
     message?:TemplateRef<any>;
     currentShown:Notification = {};
     unreadNotifications:number = 0;
 
-    notifications: Notification[] = [
-        { id: 1, title: 'Notification 1', description: 'Description 1', date: '2023-02-15', body: 'jsidnbvsakjvaivjasvnasviknavikavf a', status: 'unread' },
-        { id: 2, title: 'Notification 2', description: 'Description 2', date: '2023-07-31', body: 'jsidnbvsakjvaivjasvnasviknavikavf a', status: 'read' },
-        { id: 3, title: 'Notification 3', description: 'Description 3', date: '2023-01-01', body: 'jsidnbvsakjvaivjasvnasviknavikavf a', status: 'unread' },
-        { id: 4, title: 'Notification 4', description: 'Description 4', date: '2023-01-01', body: 'jsidnbvsakjvaivjasvnasviknavikavf a', status: 'read' }
-    ]
+    notifications: Notification[] = []
+    messages: any = [];
 
-    constructor() {}
+    constructor(private authService: AuthService) {}
 
     ngOnInit(): void {
-        /*
-            popolamento "notifications"
-        */
+        this.authService.getAllNotifications().subscribe((notifications) => {
+            this.messages = notifications;
+            console.log(this.messages.length);
+        });
+
         this.updateNotifications();
     }
 
@@ -46,12 +45,12 @@ export class AppbarComponent implements OnInit {
     }
 
     sortUnreadedFirst() {
-        this.notifications = this.notifications.sort((a,b) => {            
-            const statusComparison = (a.status === 'unread' ? 0 : 1) - (b.status === 'unread' ? 0 : 1);            
-            return (statusComparison !== 0) ? statusComparison : (a.date && b.date) ? Date.parse(b.date) - Date.parse(a.date) : 0;            
+        this.notifications = this.notifications.sort((a,b) => {
+            const statusComparison = (a.status === 'unread' ? 0 : 1) - (b.status === 'unread' ? 0 : 1);
+            return (statusComparison !== 0) ? statusComparison : (a.date && b.date) ? Date.parse(b.date) - Date.parse(a.date) : 0;
         })
     }
-    
+
     updateNotifications() {
         this.sortUnreadedFirst();
         this.unreadNotifications = this.notifications.filter(el => el.status == "unread").length;

@@ -27,7 +27,6 @@ export class LoginComponent {
         this.authService.login(this.email, this.password)
             .then(res => {
                 localStorage.setItem('userID', res.uid);
-
                 this.router.navigate(['/home/homepage']);
 
             })
