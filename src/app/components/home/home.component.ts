@@ -21,9 +21,7 @@ export class HomeComponent implements OnInit{
     constructor(private authService: AuthService) {}
 
     ngOnInit() {
-        this.authService.getUserById(this.uid).subscribe((res: any) => {
-            console.log(res);
-        });
+
     }
 
 

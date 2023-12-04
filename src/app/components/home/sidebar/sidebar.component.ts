@@ -18,7 +18,6 @@ export class SidebarComponent {
 
 
     logout() {
-        localStorage.removeItem('userID');
         this.authService.logout()
             .then(() => {
                 console.log('User logged out');
@@ -27,6 +26,7 @@ export class SidebarComponent {
             .catch(error => {
                 console.error('Logout error:', error);
             });
+
     }
 
   toggleSidebar() {

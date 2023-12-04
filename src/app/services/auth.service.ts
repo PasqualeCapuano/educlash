@@ -41,6 +41,10 @@ export class AuthService {
         return this.firestore.collection('users').doc(uid).set(userData);
     }
 
+    updateUser(uid: string, userData: any) {
+        return this.firestore.collection('users').doc(uid).update(userData);
+    }
+
     getUserById(uid: string) {
         return this.firestore.collection('users').doc(uid).valueChanges();
     }
@@ -49,10 +53,9 @@ export class AuthService {
         return this.firestore.collection('users').valueChanges();
     }
 
-    addTicket(uid: string, ticketData: any) {
-        return this.firestore.collection('users').doc(uid).update({
-            tickets: ticketData
-        });
+    getAllNotifications() {
+        return this.firestore.collection('notification').valueChanges();
     }
+
 
 }

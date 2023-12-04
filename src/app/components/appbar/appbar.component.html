@@ -3,12 +3,9 @@
     <button class="btn btn-primary mx-2" routerLink="/home/settings"><i class="bi bi-gear"></i></button>
     <button class="btn btn-primary mx-2 position-relative" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNotification" aria-controls="offcanvasRight">
         <i class="bi bi-bell"></i>
-        @if (unreadNotifications > 0) {
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+        <span *ngIf="unreadNotifications > 0" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                 {{unreadNotifications}}
-                <span class="visually-hidden">unread messages</span>
-            </span>
-        }        
+        </span>
     </button>
 </div>
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNotification" aria-labelledby="offcanvasRightLabel">
@@ -17,14 +14,12 @@
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-        <div *ngFor="let n of notifications">
+        <div *ngFor="let n of messages">
             <div class="card m-2 d-flex flex-row justify-content-center align-items-center" (click)="openNotification(n)"
                     data-bs-toggle="modal" data-bs-target="#message">
-                @if (n.status == 'unread') {
-                    <i class="bi bi-envelope mx-2"></i>
-                } @else {
-                    <i class="bi bi-envelope-open mx-2"></i>
-                }     
+                <i *ngIf="n.status == 'unread'" class="bi bi-envelope mx-2"></i>
+                <i *ngIf="n.status == 'read'" class="bi bi-envelope-open mx-2"></i>
+
                 <div class="card-body">
                     <div>
                         <h5 class="card-title">{{n.title}}</h5>
@@ -44,17 +39,17 @@
                 <div class="d-flex justify-content-between w-100">
                     <h1 class="modal-title fs-4" id="exampleModalLabel">{{currentShown.title}}</h1>
                     <span class="modal-title fs-4 fw-semibold">Id: {{currentShown.id?.toString()?.padStart(3, '0')}}</span>
-                </div>               
-                <h6 class="card-subtitle mb-2 text-muted">{{currentShown.date}}</h6>                
+                </div>
+                <h6 class="card-subtitle mb-2 text-muted">{{currentShown.date}}</h6>
             </div>
             <div class="modal-body">
-                
+
                 <p class="card-text fs-5 fw-semibold">{{currentShown.description}}</p>
                 <p class="fs fs-6">{{currentShown.body}}</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" (click)="unread(currentShown)">Mantain as unread</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>                
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
