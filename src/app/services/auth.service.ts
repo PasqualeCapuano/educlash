@@ -8,7 +8,16 @@ import {Observable} from "rxjs";
   providedIn: 'root',
 })
 export class AuthService {
-    constructor(private afAuth: AngularFireAuth, private firestore: AngularFirestore) {}
+
+    user$: any;
+
+    constructor(private afAuth: AngularFireAuth, private firestore: AngularFirestore) {
+        this.user$ = afAuth.authState;
+    }
+
+    getUserLoggedData() {
+        return this.user$;
+    }
 
     login(email: string, password: string): Promise<any> {
         return this.afAuth.signInWithEmailAndPassword(email, password)

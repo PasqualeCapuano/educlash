@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {Router, RouterLink} from "@angular/router";
 import { AuthService } from '../../../services/auth.service';
@@ -10,12 +10,22 @@ import { AuthService } from '../../../services/auth.service';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit{
 
     constructor(private authService: AuthService, private router: Router) { }
 
   isSidebarHidden = false;
+  userLoggedData: any;
 
+    ngOnInit(): void {
+         this.authService.getUserLoggedData().subscribe((u: any) => {
+        console.log(u.uid);
+        this.authService.getUserById(u.uid).subscribe((user => {
+            this.userLoggedData = user;
+            console.log(this.userLoggedData);
+        }))
+       });
+    }
 
     logout() {
         localStorage.removeItem('userID');
