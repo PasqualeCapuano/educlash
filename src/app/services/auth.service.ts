@@ -19,9 +19,9 @@ export class AuthService {
     }
 
     config = {
-        apiKey: "AIzaSyAG0hszH-LeA5KP1PQUYzZuPRp98ump2Ow",
-        authDomain: "test-fb550.firebaseapp.com",
-        databaseURL: "https://test-fb550-default-rtdb.europe-west1.firebasedatabase.app"
+        apiKey: "AIzaSyClfd11KystoPqrpMZH9uvAKkH-3G4_MBA",
+        authDomain: "educlash-f0452.firebaseapp.com",
+        databaseURL: "https://educlash-f0452-default-rtdb.europe-west1.firebasedatabase.app",
     };
     secondaryApp = firebase.initializeApp(this.config, "Secondary");
 
