@@ -32,53 +32,61 @@ export class UserManagementComponent implements OnInit{
         });
     }
 
+    // addUser() {
+    //     if (this.displayName && this.email && this.password) {
+    //         this.afAuth.createUserWithEmailAndPassword(this.email, this.password)
+    //             .then((userCredential) => {
+    //                 const user = userCredential.user;
+    //                 user?.updateProfile({displayName: this.displayName})
+    //                     .then(() => {
+    //                         console.log('Registered successfully!');
+
+    //                         this.authService.addUser(user.uid, {
+    //                             displayName: this.displayName,
+    //                             email: this.email,
+    //                             userUID: user.uid,
+    //                             admin: false,
+    //                             tickets: [
+    //                                 // {
+    //                                 //     number: 1,
+    //                                 //     title: 'Ticket 1',
+    //                                 //     status: 'open',
+    //                                 //     name: this.displayName,
+    //                                 //     email: this.email,
+    //                                 //     chat: [
+    //                                 //         {
+    //                                 //             message: 'Welcome to the chat!',
+    //                                 //             sender: this.displayName,
+    //                                 //             timestamp: new Date()
+    //                                 //         }
+    //                                 //     ]
+    //                                 // },
+
+    //                             ],
+
+    //                         })
+    //                             .then(() => {
+    //                                 console.log('User added to Firestore successfully!');
+    //                             })
+    //                             .catch(error => {
+    //                                 console.error('Error adding user to Firestore:', error);
+    //                             });
+    //                     })
+    //                     .catch(error => {
+    //                         console.error('Error updating display name:', error);
+    //                     });
+    //             })
+    //             .catch(error => {
+    //                 console.error('Error registering:', error);
+    //             });
+    //     } else {
+    //         console.error('Display name, email, and password are required.');
+    //     }
+    // }
+
     addUser() {
         if (this.displayName && this.email && this.password) {
-            this.afAuth.createUserWithEmailAndPassword(this.email, this.password)
-                .then((userCredential) => {
-                    const user = userCredential.user;
-                    user?.updateProfile({displayName: this.displayName})
-                        .then(() => {
-                            console.log('Registered successfully!');
-
-                            this.authService.addUser(user.uid, {
-                                displayName: this.displayName,
-                                email: this.email,
-                                userUID: user.uid,
-                                admin: false,
-                                tickets: [
-                                    // {
-                                    //     number: 1,
-                                    //     title: 'Ticket 1',
-                                    //     status: 'open',
-                                    //     name: this.displayName,
-                                    //     email: this.email,
-                                    //     chat: [
-                                    //         {
-                                    //             message: 'Welcome to the chat!',
-                                    //             sender: this.displayName,
-                                    //             timestamp: new Date()
-                                    //         }
-                                    //     ]
-                                    // },
-
-                                ],
-
-                            })
-                                .then(() => {
-                                    console.log('User added to Firestore successfully!');
-                                })
-                                .catch(error => {
-                                    console.error('Error adding user to Firestore:', error);
-                                });
-                        })
-                        .catch(error => {
-                            console.error('Error updating display name:', error);
-                        });
-                })
-                .catch(error => {
-                    console.error('Error registering:', error);
-                });
+        this.authService.createAccount(this.email, this.password, this.displayName);
         } else {
             console.error('Display name, email, and password are required.');
         }
