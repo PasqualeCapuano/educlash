@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {SidebarComponent} from "./sidebar/sidebar.component";
 import {RouterOutlet} from "@angular/router";
 import {AppbarComponent} from "../appbar/appbar.component";
+import {AuthService} from "../../services/auth.service";
 
 
 
@@ -13,7 +14,15 @@ import {AppbarComponent} from "../appbar/appbar.component";
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
+
+    uid: any = localStorage.getItem('userID');
+
+    constructor(private authService: AuthService) {}
+
+    ngOnInit() {
+
+    }
 
 
 

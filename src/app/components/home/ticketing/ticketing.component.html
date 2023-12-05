@@ -1,8 +1,12 @@
 <div class="d-flex p-5 flex-column justify-content-center align-items-center">
-  <div class="d-flex justify-content-end">
+  <div class="">
+
     <div class="m-3">
       <label for="search" class="form-label">Search</label>
       <input id="search" class="form-control" type="text" placeholder="" aria-label="default input example" [(ngModel)]="searchText">
+    </div>
+      <div class="m-3">
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">New Ticket</button>
     </div>
   </div>
   <table class="table m-4">
@@ -12,21 +16,59 @@
       <th scope="col">Name</th>
       <th scope="col">Email</th>
       <th scope="col">Title</th>
-      <th scope="col">Description</th>
       <th scope="col">Status</th>
+      <th scope="col"><i class="bi bi-trash"></i></th>
     </tr>
     </thead>
-    <tbody class="table-group-divider">
-    <tr *ngFor="let t of tableData | search: searchText" (click)="openDetailPage(t)">
-      <th scope="row">#{{ t.id }}</th>
-      <td>{{ t.customerName }}</td>
-      <td>{{ t.customerEmail }}</td>
-      <td>{{ t.title }}</td>
-      <td>{{ t.description }}</td>
-      <td *ngIf="t.status === 'open'" style="color: rebeccapurple"><i class="bi bi-circle"></i></td>
-      <td *ngIf="t.status === 'closed'" style="color: rebeccapurple"><i class="bi bi-circle-fill"></i></td>
-      <td *ngIf="t.status === 'processing'" style="color: rebeccapurple"><i class="bi bi-circle-half"></i></td>
+    <tbody *ngIf="!this.admin" class="table-group-divider">
+    <tr *ngFor="let t of tableData | search: searchText">
+        <th scope="row" (click)="openDetailPage(t)">#{{ t.number }}</th>
+        <td (click)="openDetailPage(t)">{{ t.name }}</td>
+        <td (click)="openDetailPage(t)">{{ t.email }}</td>
+        <td (click)="openDetailPage(t)">{{ t.title }}</td>
+        <td (click)="openDetailPage(t)" *ngIf="t.status === 'open'" style="color: rebeccapurple"><i class="bi bi-circle"></i></td>
+        <td (click)="openDetailPage(t)" *ngIf="t.status === 'closed'" style="color: rebeccapurple"><i class="bi bi-circle-fill"></i></td>
+        <td (click)="openDetailPage(t)" *ngIf="t.status === 'processing'" style="color: rebeccapurple"><i class="bi bi-circle-half"></i></td>
+        <td><button class="btn btn-primary"><i class="bi bi-trash"></i></button></td>
     </tr>
     </tbody>
+
+      <tbody *ngIf="this.admin" class="table-group-divider">
+      <tr *ngFor="let t of allTickets | search: searchText" >
+          <th scope="row" (click)="openDetailPage(t)">#{{ t.number }}</th>
+          <td (click)="openDetailPage(t)">{{ t.name }}</td>
+          <td (click)="openDetailPage(t)">{{ t.email }}</td>
+          <td (click)="openDetailPage(t)">{{ t.title }}</td>
+          <td (click)="openDetailPage(t)" *ngIf="t.status === 'open'" style="color: rebeccapurple"><i class="bi bi-circle"></i></td>
+          <td (click)="openDetailPage(t)" *ngIf="t.status === 'closed'" style="color: rebeccapurple"><i class="bi bi-circle-fill"></i></td>
+          <td (click)="openDetailPage(t)" *ngIf="t.status === 'processing'" style="color: rebeccapurple"><i class="bi bi-circle-half"></i></td>
+          <td><button class="btn btn-primary"><i class="bi bi-trash"></i></button></td>
+      </tr>
+      </tbody>
   </table>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">New Ticket</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label for="title" class="form-label">Title</label>
+                <input id="title" class="form-control" type="text" placeholder="" aria-label="default input example" [(ngModel)]="title">
+                <label for="description" class="form-label">Description</label>
+                <textarea id="description" class="form-control" type="text" placeholder="" aria-label="default input example" [(ngModel)]="message"></textarea>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="addTicket()">Submit Ticket</button>
+            </div>
+        </div>
+    </div>
 </div>

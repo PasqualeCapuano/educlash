@@ -12,19 +12,19 @@ import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 
 export const appConfig: ApplicationConfig = {
     providers: [
-        provideRouter(routes),
-        provideAnimations(),
-        importProvidersFrom([
-            // provideFirebaseApp(() => initializeApp(environment.firebase)),
-            // provideFirestore(() => {return getFirestore();
-            // }),
-            // provideAuth(() => {
-            //     let auth: Auth = getAuth();
-            //     return auth;
-            // })
-
-            AngularFireModule.initializeApp(environment.firebase),
-            AngularFireAuthModule
-        ])
-    ]
+    provideRouter(routes),
+    provideAnimations(),
+    importProvidersFrom([
+        // provideFirebaseApp(() => initializeApp(environment.firebase)),
+        // provideFirestore(() => {return getFirestore();
+        // }),
+        // provideAuth(() => {
+        //     let auth: Auth = getAuth();
+        //     return auth;
+        // })
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireAuthModule
+    ]),
+    provideAnimations()
+]
 };
