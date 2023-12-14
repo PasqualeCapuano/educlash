@@ -6,6 +6,11 @@
 /out-tsc
 /bazel-out
 
+# Firebase
+.firebase/
+
+/src/environments/environment.ts
+
 # Node
 /node_modules
 npm-debug.log
@@ -53,6 +58,4 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# Firebase
-.firebase/
-/src/environments
+
