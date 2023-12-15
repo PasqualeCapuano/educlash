@@ -16,6 +16,7 @@ import {SettingsComponent} from "./components/home/settings/settings.component";
 import { UserManagementComponent } from './components/home/admin/user-management/user-management.component';
 import { ChallengeManagementComponent } from './components/home/admin/challenge-management/challenge-management.component';
 import {AuthGuard} from "./guards/auth.guard";
+import { Error404Component } from './components/error-404/error-404.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -35,6 +36,7 @@ export const routes: Routes = [
       {path: 'admin/challenge-management', component: ChallengeManagementComponent},
     ]
   },
-  { path: 'privacy', component: PrivacyPolicyComponent }
+  { path: 'privacy', component: PrivacyPolicyComponent },
+  { path: '**', component: Error404Component }
 
 ];
