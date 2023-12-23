@@ -39,6 +39,7 @@ export class AppbarComponent implements OnInit {
     darkThemeClass = 'theme-dark';
     lightThemeClass = 'theme-light';
     isDarkMode = false;
+    disabledBtn: boolean = true;
 
     constructor(private authService: AuthService, private overlay : OverlayContainer) {
     }
@@ -86,6 +87,14 @@ export class AppbarComponent implements OnInit {
         this.title = '';
         this.text = '';
       }
+
+    controllaCampi(){
+        if(this.title === '' || this.text === ''){
+            this.disabledBtn = true;
+        } else{
+            this.disabledBtn = false;
+        }
+    }
 
     addTicket() {
 

@@ -26,6 +26,7 @@ export class TicketingComponent implements OnInit {
     allTickets: any = [];
     allUsers: any = [];
     ticketIdCount: number = 0;
+    disabledBtn: boolean = true;
 
     constructor(private router: Router, private dataService: DataService, private authService: AuthService) {
     }
@@ -67,6 +68,14 @@ export class TicketingComponent implements OnInit {
     this.title = '';
     this.message = '';
   }
+
+  controllaCampi(){
+    if(this.title === '' || this.message === ''){
+        this.disabledBtn = true;
+    } else{
+        this.disabledBtn = false;
+    }
+}
 
 
   addTicket() {
