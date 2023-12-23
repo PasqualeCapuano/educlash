@@ -1,38 +1,41 @@
+
 /* You can add global styles to this file, and also import other style files */
 // Global styles.scss
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-// Custom scrollbar styles
-::-webkit-scrollbar {
-  width: 12px; // Adjust the width of the scrollbar
-}
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  // Custom scrollbar styles
+  ::-webkit-scrollbar {
+    width: 12px; // Adjust the width of the scrollbar
+  }
 
-::-webkit-scrollbar-track {
-  background: rgba(241, 241, 241, 0); // Color of the scrollbar track
-  border-radius: 6px; // Optional: for rounded corners
-}
+  ::-webkit-scrollbar-track {
+    background: rgba(241, 241, 241, 0); // Color of the scrollbar track
+    border-radius: 6px; // Optional: for rounded corners
+  }
 
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #7b1fa2, #4a148c); // Purple gradient for the scrollbar thumb
-  border-radius: 6px; // Optional: for rounded corners
-}
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #7b1fa2, #4a148c); // Purple gradient for the scrollbar thumb
+    border-radius: 6px; // Optional: for rounded corners
+  }
 
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, #9c27b0, #6a1b9a); // Slightly different gradient on hover
-}
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #9c27b0, #6a1b9a); // Slightly different gradient on hover
+  }
 
-.btn-primary{
-  background-color: #7b1fa2;
-  border-color: #7b1fa2;
-}
+  .btn-primary{
+    background-color: #7b1fa2;
+    border-color: #7b1fa2;
+  }
 
-.btn-primary:hover{
-  background-color: #9c27b0;
-  border-color: #9c27b0;
-}
+  .btn-primary:hover{
+    background-color: #9c27b0;
+    border-color: #9c27b0;
+  }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+  html, body { height: 100%; }
+  body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+

@@ -31,22 +31,27 @@ export class TicketingComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.authService.getAllUsers().subscribe((res: any) => {
-            this.allUsers = res;
-            res.forEach((user: any) => {
-                user.tickets.forEach((ticket: any) => {
-                    this.allTickets.push(ticket);
-                });
-            });
-            this.user.tickets = this.allTickets;
+        //this.authService.getAllUsers().subscribe((res: any) => {
+         //   this.allUsers = res;
+         //   res.forEach((user: any) => {
+          //      user.tickets.forEach((ticket: any) => {
+           //         this.allTickets.push(ticket);
+            //    });
+            //});
+            //this.user.tickets = this.allTickets;
 
-        });
+        //});
 
         this.authService.getUserById(this.uid).subscribe((res: any) => {
             this.user = res;
             this.admin = this.user.admin;
 
-            this.tableData = this.user.tickets;
+
+            if(this.admin){
+                this.allTickets = this.user.tickets;
+            } else {
+                this.tableData = this.user.tickets;
+            }
         });
     }
 
@@ -58,7 +63,13 @@ export class TicketingComponent implements OnInit {
     this.router.navigate(['/home/ticketing/' + data.id]);
   }
 
-    addTicket() {
+  svuotaCampi() {
+    this.title = '';
+    this.message = '';
+  }
+
+
+  addTicket() {
 
       console.log('all users', this.allUsers);
       this.allUsers.forEach((user: any) => {
@@ -87,6 +98,8 @@ export class TicketingComponent implements OnInit {
           }
       );
 
+      this.svuotaCampi();
+
         console.log('Updating user with new ticket', this.user);
 
         this.authService.updateUser(this.uid, this.user).then((res: any) => {
@@ -95,7 +108,5 @@ export class TicketingComponent implements OnInit {
             console.error('Error updating user:', error);
         });
     }
-
-
 
 }
