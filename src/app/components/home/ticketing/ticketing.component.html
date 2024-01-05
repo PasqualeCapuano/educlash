@@ -1,32 +1,41 @@
 <div class="d-flex p-5 flex-column justify-content-center align-items-center">
-  <div class="d-flex justify-content-end">
-    <div class="m-3">
-      <label for="search" class="form-label">Search</label>
-      <input id="search" class="form-control" type="text" placeholder="" aria-label="default input example" [(ngModel)]="searchText">
+    <div class="">
+        <div class="m-3">
+            <label for="search" class="form-label">Search</label>
+            <input id="search" class="form-control" type="text" placeholder="" aria-label="default input example" [(ngModel)]="searchText">
+        </div>
+        <div class="m-3">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">New Ticket</button>
+        </div>
     </div>
-  </div>
-  <table class="table m-4">
-    <thead>
-    <tr>
-      <th scope="col">id</th>
-      <th scope="col">Name</th>
-      <th scope="col">Email</th>
-      <th scope="col">Title</th>
-      <th scope="col">Description</th>
-      <th scope="col">Status</th>
-    </tr>
-    </thead>
-    <tbody class="table-group-divider">
-    <tr *ngFor="let t of tableData | search: searchText" (click)="openDetailPage(t)">
-      <th scope="row">#{{ t.id }}</th>
-      <td>{{ t.customerName }}</td>
-      <td>{{ t.customerEmail }}</td>
-      <td>{{ t.title }}</td>
-      <td>{{ t.description }}</td>
-      <td *ngIf="t.status === 'open'" style="color: rebeccapurple"><i class="bi bi-circle"></i></td>
-      <td *ngIf="t.status === 'closed'" style="color: rebeccapurple"><i class="bi bi-circle-fill"></i></td>
-      <td *ngIf="t.status === 'processing'" style="color: rebeccapurple"><i class="bi bi-circle-half"></i></td>
-    </tr>
-    </tbody>
-  </table>
+    <table class="table m-4">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th *ngIf="this.isAdmin" scope="col">Name</th>
+                <th *ngIf="this.isAdmin" scope="col">Email</th>
+                <th scope="col">Title</th>
+                <th scope="col">Status</th>
+                <th scope="col"><i class="bi bi-trash"></i></th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <tr *ngFor="let t of tableData | search: searchText" class="align-middle">
+                <!-- <th scope="row" (click)="openDetailPage(t)">{{ (i+1).toString().padStart(3, '0') }}</th>  -->
+                <th scope="row" (click)="openDetailPage(t)">{{ t.ticketUID }}</th>
+                <td *ngIf="this.isAdmin" (click)="openDetailPage(t)">{{ t.name }}</td>
+                <td *ngIf="this.isAdmin" (click)="openDetailPage(t)">{{ t.email }}</td>
+                <td (click)="openDetailPage(t)">{{ t.title }}</td>
+                <td (click)="openDetailPage(t)" style="color: rebeccapurple">
+                    <i [ngClass]="{
+                            'bi bi-circle': t.status === 'open',
+                            'bi bi-circle-fill': t.status === 'closed',
+                            'bi bi-circle-half': t.status === 'processing'
+                          }">
+                    </i>
+                </td>
+                <td><button class="btn btn-primary" (click)="delete(t.ticketUID)"><i class="bi bi-trash"></i></button></td>
+            </tr>
+        </tbody>
+    </table>
 </div>

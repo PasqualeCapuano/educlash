@@ -11,21 +11,32 @@ import {TicketingDetailComponent} from "./components/home/ticketing-detail/ticke
 import {ProfileComponent} from "./components/home/profile/profile.component";
 import {ChallengeComponent} from "./components/home/challenge/challenge.component";
 import {ChallengeDetailComponent} from "./components/home/challenge-detail/challenge-detail.component";
+import { PrivacyPolicyComponent } from './components/footer/privacy-policy/privacy-policy.component';
+import {SettingsComponent} from "./components/home/settings/settings.component";
+import { UserManagementComponent } from './components/home/admin/user-management/user-management.component';
+import { ChallengeManagementComponent } from './components/home/admin/challenge-management/challenge-management.component';
+import {AuthGuard} from "./guards/auth.guard";
+import { Error404Component } from './components/error-404/error-404.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent, children: [
-      { path: 'sidebar', component: SidebarComponent },
-      { path: 'homepage', component: HomepageComponent },
-      { path: 'profile', component: ProfileComponent },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard],  children: [
+      { path: 'sidebar', component: SidebarComponent, },
+      { path: 'settings', component: SettingsComponent, },
+      { path: 'homepage', component: HomepageComponent, },
+      { path: 'profile', component: ProfileComponent,},
       { path: 'challenge', component: ChallengeComponent },
       { path: 'challenge/:id', component: ChallengeDetailComponent },
       { path: 'tutorial', component: TutorialComponent },
       { path: 'ticketing', component: TicketingComponent },
       { path: 'ticketing/:id', component: TicketingDetailComponent },
-      { path: 'admin', component: AdminComponent}
+      { path: 'admin', component: AdminComponent},
+      {path: 'admin/user-management', component: UserManagementComponent},
+      {path: 'admin/challenge-management', component: ChallengeManagementComponent},
     ]
   },
+  { path: 'privacy', component: PrivacyPolicyComponent },
+  { path: '**', component: Error404Component }
 
 ];

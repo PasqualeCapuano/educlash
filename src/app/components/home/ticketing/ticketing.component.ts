@@ -1,166 +1,65 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {Router} from "@angular/router";
-import {DataService} from "../../../services/data.service";
-import {FormsModule} from "@angular/forms";
-import {SearchPipe} from "./search.pipe";
+import { Router } from "@angular/router";
+import { DataService } from "../../../services/data.service";
+import { FormsModule } from "@angular/forms";
+import { SearchPipe } from "./search.pipe";
+import { AuthService } from "../../../services/auth.service";
 
 @Component({
-  selector: 'app-ticketing',
-  standalone: true,
-  imports: [CommonModule, FormsModule, SearchPipe],
-  templateUrl: './ticketing.component.html',
-  styleUrl: './ticketing.component.scss'
+    selector: 'app-ticketing',
+    standalone: true,
+    imports: [CommonModule, FormsModule, SearchPipe],
+    templateUrl: './ticketing.component.html',
+    styleUrl: './ticketing.component.scss'
 })
-export class TicketingComponent {
+export class TicketingComponent implements OnInit {
 
-  constructor(private router: Router, private dataService: DataService) {}
+    user: any = {};
+    uid: string = "";
+    isAdmin: boolean = false;
+    tableData: [] = [];
+    
+    allTickets: any = [];
+    allUsers: any = [];
+    searchText: string = '';
 
-  tableData = [
-    { id: 1,
-      customerName: 'Mark',
-      customerEmail: 'mark@gmail.com',
-      title: 'New Ticket 3',
-      description: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-      status: 'open',
-      messages:[
-        { id: 1,
-          customerName: 'Mark',
-          customerEmail: 'mark@gmail.com',
-          user: 'admin',
-        },
-        { id: 2,
-          customerName: 'Mark',
-          customerEmail: 'mark@gmail.com',
-          user: 'user',
-        },
-        { id: 3,
-          customerName: 'Mark',
-          customerEmail: '',
-          user: 'admin',
-        },
-        { id: 4,
-          customerName: 'Mark',
-          customerEmail: 'mark@gmail.com',
-          user: 'admin',
-        },
-        { id: 5,
-          customerName: 'Mark',
-          customerEmail: 'mark@gmail.com',
-          user: 'user',
-        },
-        { id: 6,
-          customerName: 'Mark',
-          customerEmail: '',
-          user: 'admin',
-        }
-      ]
-    },
-    { id: 2,
-      customerName: 'Paul',
-      customerEmail: 'paul@gmail.com',
-      title: 'New ticket 2',
-      description: 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
-      status: 'closed',
-    },
-    { id: 3,
-      customerName: 'Claire',
-      customerEmail: 'claire@gmail.com',
-      title: 'New ticket 3',
-      description: 'ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc',
-      status: 'processing',
-    },
-    { id: 4,
-      customerName: 'Paul',
-      customerEmail: 'paul@gmail.com',
-      title: 'New ticket 2',
-      description: 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
-      status: 'closed',
-    },
-    { id: 5,
-      customerName: 'Claire',
-      customerEmail: 'claire@gmail.com',
-      title: 'New ticket 3',
-      description: 'ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc',
-      status: 'processing',
-    },
-    { id: 6,
-      customerName: 'Paul',
-      customerEmail: 'paul@gmail.com',
-      title: 'New ticket 2',
-      description: 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
-      status: 'closed',
-    },
-    { id: 7,
-      customerName: 'Claire',
-      customerEmail: 'claire@gmail.com',
-      title: 'New ticket 3',
-      description: 'ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc',
-      status: 'processing',
-    },
-    { id: 8,
-      customerName: 'Paul',
-      customerEmail: 'paul@gmail.com',
-      title: 'New ticket 2',
-      description: 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
-      status: 'closed',
-    },
-    { id: 9,
-      customerName: 'Claire',
-      customerEmail: 'claire@gmail.com',
-      title: 'New ticket 3',
-      description: 'ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc',
-      status: 'processing',
-    },
-    { id: 10,
-      customerName: 'Paul',
-      customerEmail: 'paul@gmail.com',
-      title: 'New ticket 2',
-      description: 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
-      status: 'closed',
-    },
-    { id: 11,
-      customerName: 'Claire',
-      customerEmail: 'claire@gmail.com',
-      title: 'New ticket 3',
-      description: 'ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc',
-      status: 'processing',
-    },
-    { id: 12,
-      customerName: 'Paul',
-      customerEmail: 'paul@gmail.com',
-      title: 'New ticket 2',
-      description: 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
-      status: 'closed',
-    },
-    { id: 13,
-      customerName: 'Claire',
-      customerEmail: 'claire@gmail.com',
-      title: 'New ticket 3',
-      description: 'ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc',
-      status: 'processing',
-    },
-    { id: 14,
-      customerName: 'Paul',
-      customerEmail: 'paul@gmail.com',
-      title: 'New ticket 2',
-      description: 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
-      status: 'closed',
-    },
-    { id: 15,
-      customerName: 'Claire',
-      customerEmail: 'claire@gmail.com',
-      title: 'New ticket 3',
-      description: 'ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc',
-      status: 'processing',
+    
+
+    constructor(private router: Router, private dataService: DataService, private authService: AuthService) { }
+    
+    ngOnInit() {        
+        this.authService.getAllUsers().subscribe((users: any) => {
+            console.log(users);
+            this.allUsers = users;
+            this.authService.getUserLoggedData().subscribe((u: any) => {
+                this.uid = u.uid;
+                this.user = users.find((u: any) => u.userUID == this.uid);
+                this.isAdmin = this.user.admin;
+                this.authService.getAllTickets().subscribe((tickets: any) => {
+                    this.allTickets = tickets;
+                    if (this.isAdmin) {
+                        tickets.forEach((t:any) => {
+                            const user = users.find((u: any) => u.userUID == t.userUID);
+                            t.name = user.displayName;
+                            t.email = user.email;
+                        })
+                        this.tableData = tickets;
+                        console.log(this.tableData);
+
+                    }
+                    else this.tableData = tickets.filter((t:any) => t.userUID == this.uid);
+                });
+            });     
+        });        
     }
-  ];
 
-  searchText: string = '';
+    openDetailPage(ticket: any) {
+        this.dataService.setCurrentRowData(ticket);
+        this.router.navigate(['/home/ticketing/' + ticket.ticketUID]);
+    }
 
-  openDetailPage(data: any) {
-    this.dataService.setCurrentRowData(data);
-    this.router.navigate(['/home/ticketing/' + data.id]);
-  }
-
+    delete(uid:string) {
+        this.authService.deleteTicket(uid);
+    }
 }

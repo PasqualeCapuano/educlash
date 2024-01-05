@@ -1,0 +1,61 @@
+<div class="container">
+  <h1 class="text-center">Gestione Challenges</h1>
+  <div class="mt-5 justify-content-center d-flex">
+    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#addChallenge">Aggiungi Challenge</button>
+  </div>
+
+  <div class="challenge-list">
+    <div *ngFor="let c of challenge" class="photo-item">
+      <div class="card" style="width: 20rem;">
+        <img style="object-fit: cover;height: 200px;width: 100%;" src="{{c.src}}" class="card-img-top" alt="photo">
+        <div class="card-body">
+          <h5 class="card-title">{{c.name}}</h5>
+          <p class="card-text">{{c.description}}</p>
+          <div class="justify-content-center d-flex">
+          <button class="btn btn-primary me-2" (click)="openDetailPage(c)">Visualizza</button>
+          <button class="btn btn-primary me-2" type="button" data-bs-toggle="modal" data-bs-target="#editChallenge">Modifica</button>
+          <button class="btn btn-primary">Rimuovi</button>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD NEW CHALLENGE MODAL -->
+  <div class="modal fade" id="addChallenge" tabindex="-1" aria-labelledby="addChallengeModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="addChallengeModal">Aggiungi nuova Challenge</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDIT CHALLENGE MODAL -->
+  <div class="modal fade" id="editChallenge" tabindex="-1" aria-labelledby="editChallengeModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="editChallengeModal">Modifica Challenge</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
