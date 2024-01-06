@@ -3,7 +3,7 @@ import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
-import { Observable } from "rxjs";
+import { BehaviorSubject, Observable, of, switchMap } from "rxjs";
 
 
 @Injectable({
@@ -12,9 +12,11 @@ import { Observable } from "rxjs";
 export class AuthService {
 
     user$: any;
+    private userData: any = new BehaviorSubject<any>(null);    
 
     constructor(private afAuth: AngularFireAuth, private firestore: AngularFirestore) {
         this.user$ = afAuth.authState;
+        this.getUser().subscribe((user: any) => this.userData.next(user));        
     }
 
     config = {
@@ -37,23 +39,7 @@ export class AuthService {
                         displayName: name,
                         email: em,
                         userUID: user.uid,
-                        admin: false,
-                        tickets: [
-                            // {
-                            //     number: 1,
-                            //     title: 'Ticket 1',
-                            //     status: 'open',
-                            //     name: this.displayName,
-                            //     email: this.email,
-                            //     chat: [
-                            //         {
-                            //             message: 'Welcome to the chat!',
-                            //             sender: this.displayName,
-                            //             timestamp: new Date()
-                            //         }
-                            //     ]
-                            // },
-                        ],
+                        admin: false
                     })
                         .then(() => {
                             console.log('User added to Firestore successfully!');
@@ -67,6 +53,17 @@ export class AuthService {
 
     getUserLoggedData() {
         return this.user$;
+    }
+
+    getUser(): Observable<any> {
+        if (!this.userData.getValue())
+            return this.user$.pipe(
+                switchMap((user:any) => {
+                    if (user) return this.getUserById(user.uid);
+                    return of(null); 
+                })
+            );
+        return this.userData.asObservable();
     }
 
     login(email: string, password: string): Promise<any> {

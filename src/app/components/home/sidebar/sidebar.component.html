@@ -10,7 +10,7 @@
         <li><a routerLink="/home/challenge"><i class="bi bi-lightning"></i> Challenge</a></li>
         <li><a routerLink="/home/tutorial"><i class="bi bi-backpack"></i> Tutorial</a></li>
         <li><a routerLink="/home/ticketing"><i class="bi bi-balloon"></i> Ticketing</a></li>
-        <div *ngIf="userLoggedData.admin === true">
+        <div *ngIf="this.isAdmin === true">
             <hr>
             <li><a routerLink="/home/admin"><i class="bi bi-person-lines-fill"></i> Admin</a></li>
             <hr>

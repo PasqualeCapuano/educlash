@@ -14,17 +14,20 @@ export class SidebarComponent implements OnInit{
 
     constructor(private authService: AuthService, private router: Router) { }
 
-  isSidebarHidden = false;
-  userLoggedData: any;
+  isSidebarHidden:boolean = false;
+  isAdmin:boolean = false;
 
     ngOnInit(): void {
-         this.authService.getUserLoggedData().subscribe((u: any) => {
-        console.log(u.uid);
-        this.authService.getUserById(u.uid).subscribe((user => {
-            this.userLoggedData = user;
-            console.log(this.userLoggedData);
-        }))
-       });
+        this.authService.getUser().subscribe((user => {
+            this.isAdmin = user.admin;            
+        }));
+    //     this.authService.getUserLoggedData().subscribe((u: any) => {
+    //     console.log(u.uid);
+    //     this.authService.getUserById(u.uid).subscribe((user => {
+    //         this.userLoggedData = user;
+    //         console.log(this.userLoggedData);
+    //     }))
+    //    });
     }
 
     logout() {

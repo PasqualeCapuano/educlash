@@ -32,10 +32,10 @@ export class TicketingComponent implements OnInit {
         this.authService.getAllUsers().subscribe((users: any) => {
             console.log(users);
             this.allUsers = users;
-            this.authService.getUserLoggedData().subscribe((u: any) => {
-                this.uid = u.uid;
-                this.user = users.find((u: any) => u.userUID == this.uid);
-                this.isAdmin = this.user.admin;
+            this.authService.getUser().subscribe((u: any) => {
+                this.uid = u.userUID;
+                this.user = u;
+                this.isAdmin = u.admin;
                 this.authService.getAllTickets().subscribe((tickets: any) => {
                     this.allTickets = tickets;
                     if (this.isAdmin) {
